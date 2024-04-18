@@ -1,48 +1,83 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import type {Meta, StoryObj} from '@storybook/angular';
+import {moduleMetadata} from '@storybook/angular';
 import { fn } from '@storybook/test';
-import { ButtonComponent } from './button.component';
-
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories
+import { MatButtonModule } from '@angular/material/button';
+import ButtonComponent, {ButtonType} from '../lib/ui/button/button.component';
+// More on how to set up stories at: https://storybook.js.org/docs/angular/writing-stories/introduction
 const meta: Meta<ButtonComponent> = {
-  title: 'Example/Button',
+  title: 'UI/MatButton',
   component: ButtonComponent,
   tags: ['autodocs'],
+  /*render: (args: MatProxyButtonComponent) => ({
+    props: {
+      ...args,
+    },
+  }),*/
   argTypes: {
-    backgroundColor: {
+    buttonType: {
+      control: { type: 'select' }, options: ButtonType
+    },
+    color: {
       control: 'color',
     },
+    isDisabled: {
+      defaultValue: false,
+      control: 'boolean',
+    }
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
+  args: { handleClick: fn() },
+  decorators: [
+    moduleMetadata({
+      imports: [ButtonComponent, MatButtonModule],
+      declarations: [],
+    }),
+  ],
 };
-
 export default meta;
 type Story = StoryObj<ButtonComponent>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const Default: Story = {
+  args: {
+    buttonType: ButtonType.Basic,
+    color: 'primary',
+    label: 'Default',
+    isDisabled: false
+  },
+};
+
 export const Primary: Story = {
   args: {
-    primary: true,
-    label: 'Button',
+    buttonType: ButtonType.Raised,
+    color: 'primary',
+    label: 'Primary',
+    isDisabled: false
   },
 };
 
 export const Secondary: Story = {
   args: {
-    label: 'Button',
+    buttonType: ButtonType.Flat,
+    color: 'accent',
+    label: 'Secondary',
+    isDisabled: false
   },
 };
 
-export const Large: Story = {
+export const Warn: Story = {
   args: {
-    size: 'large',
-    label: 'Button',
+    buttonType: ButtonType.Flat,
+    color: 'warn',
+    label: 'Warn',
+    isDisabled: false
   },
 };
 
-export const Small: Story = {
+export const Icon: Story = {
   args: {
-    size: 'small',
-    label: 'Button',
+    buttonType: ButtonType.Icon,
+    color: 'basic',
+    label: 'search',
+    isDisabled: false
   },
 };

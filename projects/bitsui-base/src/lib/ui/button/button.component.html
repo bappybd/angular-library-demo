@@ -1,0 +1,7 @@
+<button *ngIf="buttonType === ButtonType.Basic" mat-button [color]="color" [disabled]="isDisabled" (click)="handleClick.emit($event)">{{label}}</button>
+<button *ngIf="buttonType === ButtonType.Raised" mat-raised-button [color]="color" [disabled]="isDisabled" (click)="handleClick.emit($event)">{{label}}</button>
+<button *ngIf="buttonType === ButtonType.Stroked" mat-stroked-button [color]="color" [disabled]="isDisabled" (click)="handleClick.emit($event)">{{label}}</button>
+<button *ngIf="buttonType === ButtonType.Flat" mat-flat-button [color]="color" [disabled]="isDisabled" (click)="handleClick.emit($event)">{{label}}</button>
+<button *ngIf="buttonType === ButtonType.Icon" mat-icon-button [color]="color" [disabled]="isDisabled" (click)="handleClick.emit($event)">
+  <mat-icon class="s-24 secondary-text">{{label}}</mat-icon>
+</button>

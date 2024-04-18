@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ButtonComponent } from './button.component';
+import ButtonComponent from '../lib/ui/button/button.component';
 import type { User } from './user';
 
 @Component({
@@ -35,29 +35,29 @@ import type { User } from './user';
             Welcome, <b>{{ user.name }}</b
             >!
           </span>
-          <storybook-button
+          <mat-storybook-button
             *ngIf="user"
             size="small"
-            (onClick)="onLogout.emit($event)"
+            (handleClick)="onLogout.emit($event)"
             label="Log out"
-          ></storybook-button>
+          ></mat-storybook-button>
         </div>
         <div *ngIf="!user">
-          <storybook-button
+          <mat-storybook-button
             *ngIf="!user"
             size="small"
             class="margin-left"
-            (onClick)="onLogin.emit($event)"
+            (handleClick)="onLogin.emit($event)"
             label="Log in"
-          ></storybook-button>
-          <storybook-button
+          ></mat-storybook-button>
+          <mat-storybook-button
             *ngIf="!user"
             size="small"
             [primary]="true"
             class="margin-left"
-            (onClick)="onCreateAccount.emit($event)"
+            (handleClick)="onCreateAccount.emit($event)"
             label="Sign up"
-          ></storybook-button>
+          ></mat-storybook-button>
         </div>
       </div>
     </div>

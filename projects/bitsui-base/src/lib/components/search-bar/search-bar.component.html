@@ -1,0 +1,17 @@
+<div class="fuse-search-bar" [ngClass]="{'expanded':!collapsed}">
+
+    <div class="fuse-search-bar-content">
+
+        <label for="fuse-search-bar-input">
+            <mat-storybook-button class="fuse-search-bar-expander" *ngIf="collapsed" [buttonType]="'icon'"
+                                  [label]="'search'" (handleClick)="expand()"></mat-storybook-button>
+        </label>
+
+        <input id="fuse-search-bar-input" class="ml-24" type="text" placeholder="Search" (input)="search($event)"
+               fxFlex>
+        <mat-storybook-button *ngIf="!collapsed" class="fuse-search-bar-collapse" [buttonType]="'icon'"
+                              [label]="'close'" (handleClick)="collapse()"></mat-storybook-button>
+
+    </div>
+
+</div>

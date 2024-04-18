@@ -4,21 +4,100 @@
     "injectables": [],
     "guards": [],
     "interceptors": [],
-    "classes": [],
+    "classes": [
+        {
+            "name": "MockFuseConfigService",
+            "id": "class-MockFuseConfigService-85bb958158bcddb3bf68bc7059da980a8aba367ff5813b1b56ac6f3c2d4809fc8da694980688c8779298aceb942118575bbf0c89b030e0c31576734962e7386b",
+            "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';\r\nimport { action } from '@storybook/addon-actions';\r\nimport { FuseSearchBarComponent } from '../lib/components/search-bar/search-bar.component';\r\nimport { FuseConfigService } from '../lib/services/config.service';\r\nimport { Subject } from 'rxjs';\r\nimport ButtonComponent, {ButtonType} from \"../lib/ui/button/button.component\";\r\n\r\n// Mocking the FuseConfigService\r\nclass MockFuseConfigService {\r\n  config = new Subject<any>();\r\n}\r\n\r\nexport default {\r\n  title: 'UI/Fuse Search Bar',\r\n  component: FuseSearchBarComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      providers: [\r\n        { provide: FuseConfigService, useClass: MockFuseConfigService }\r\n      ],\r\n    }),\r\n  ],\r\n} as Meta<FuseSearchBarComponent>;\r\n\r\ntype Story = StoryObj<FuseSearchBarComponent>;\r\nexport const Default: Story = {\r\n  args: {\r\n    collapsed: true\r\n  },\r\n};\r\n\r\nexport const Expanded: Story = {\r\n  args: {\r\n    collapsed: true\r\n  },\r\n};\r\n\r\nexport const Collapsed: Story = {\r\n  args: {\r\n    collapsed: false\r\n  },\r\n};\r\n\r\nexport const WithSearch = () => ({\r\n  component: FuseSearchBarComponent,\r\n  props: {},\r\n  template: `<fuse-search-bar (inputEventEmitter)=\"onSearch($event)\"></fuse-search-bar>`,\r\n  methods: { onSearch: action('Search') },\r\n});\r\n",
+            "properties": [
+                {
+                    "name": "config",
+                    "defaultValue": "new Subject<any>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        }
+    ],
     "directives": [],
     "components": [],
     "modules": [],
     "miscellaneous": {
         "variables": [
             {
-                "name": "Large",
+                "name": "Collapsed",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    collapsed: false\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/bitsui-base/src/stories/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Basic,\r\n    color: 'primary',\r\n    label: 'Default',\r\n    isDisabled: false\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    layout: 'horizontal',\r\n    navigation: mockData\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    collapsed: true\r\n  },\r\n}"
+            },
+            {
+                "name": "Expanded",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    collapsed: true\r\n  },\r\n}"
+            },
+            {
+                "name": "Icon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Icon,\r\n    color: 'basic',\r\n    label: 'search',\r\n    isDisabled: false\r\n  },\r\n}"
             },
             {
                 "name": "LoggedIn",
@@ -68,7 +147,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
+                "defaultValue": "{\r\n  title: 'UI/MatButton',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  /*render: (args: MatProxyButtonComponent) => ({\r\n    props: {\r\n      ...args,\r\n    },\r\n  }),*/\r\n  argTypes: {\r\n    buttonType: {\r\n      control: { type: 'select' }, options: ButtonType\r\n    },\r\n    color: {\r\n      control: 'color',\r\n    },\r\n    isDisabled: {\r\n      defaultValue: false,\r\n      control: 'boolean',\r\n    }\r\n  },\r\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\r\n  args: { handleClick: fn() },\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [ButtonComponent, MatButtonModule],\r\n      declarations: [],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "meta",
@@ -84,21 +163,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<MatProxyButtonComponent>",
-                "defaultValue": "{\r\n  title: 'Example/MatButton',\r\n  component: MatProxyButtonComponent,\r\n  tags: ['autodocs'],\r\n  render: (args: MatProxyButtonComponent) => ({\r\n    props: {\r\n      ...args,\r\n    },\r\n  }),\r\n  argTypes: {\r\n    color: {\r\n      control: 'color',\r\n    },\r\n    isDisabled: {\r\n      defaultValue: false,\r\n      control: 'boolean',\r\n    }\r\n  },\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [MatProxyButtonComponent],\r\n      declarations: [],\r\n    }),\r\n  ],\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/bitsui-base/src/stories/page.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<PageComponent>",
                 "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+            },
+            {
+                "name": "mockData",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "FuseNavigationItem[]",
+                "defaultValue": "[\r\n  {\r\n    id: 'dashboard',\r\n    title: 'Dashboard',\r\n    type: 'item',\r\n    icon: 'heroicons_outline:home',\r\n    url: '/dashboard',\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'management',\r\n    title: 'Management',\r\n    type: 'collapsable',\r\n    icon: 'heroicons_outline:briefcase',\r\n    children: [\r\n      {\r\n        id: 'users',\r\n        title: 'Users',\r\n        type: 'item',\r\n        url: '/management/users',\r\n        isFeatureFound: true\r\n      },\r\n      {\r\n        id: 'roles',\r\n        title: 'Roles',\r\n        type: 'item',\r\n        url: '/management/roles',\r\n        isFeatureFound: true\r\n      },\r\n    ],\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'settings',\r\n    title: 'translate:SETTINGS', // Translation key for title\r\n    type: 'item',\r\n    icon: 'heroicons_outline:cog',\r\n    translate: 'SETTINGS', // Translation key for accessibility\r\n    badge: {\r\n      title: '3',\r\n      bg: 'primary',\r\n      fg: 'white',\r\n    },\r\n    url: '/settings',\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'documentation',\r\n    title: 'Documentation',\r\n    type: 'item',\r\n    icon: 'heroicons_outline:book',\r\n    externalUrl: true,\r\n    openInNewTab: true,\r\n    url: 'https://example.com/docs',\r\n    isFeatureFound: true\r\n  }\r\n]"
             },
             {
                 "name": "preview",
@@ -118,17 +197,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    color: 'primary',\r\n    isDisabled: false\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Raised,\r\n    color: 'primary',\r\n    label: 'Primary',\r\n    isDisabled: false\r\n  },\r\n}"
             },
             {
                 "name": "Secondary",
@@ -138,37 +207,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "Secondary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    color: 'accent',\r\n    isDisabled: false\r\n  },\r\n}"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/bitsui-base/src/stories/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+                "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Flat,\r\n    color: 'accent',\r\n    label: 'Secondary',\r\n    isDisabled: false\r\n  },\r\n}"
             },
             {
                 "name": "Warn",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
+                "file": "projects/bitsui-base/src/stories/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    color: 'warn',\r\n    isDisabled: false\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Flat,\r\n    color: 'warn',\r\n    label: 'Warn',\r\n    isDisabled: false\r\n  },\r\n}"
+            },
+            {
+                "name": "WithSearch",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "() => ({\r\n  component: FuseSearchBarComponent,\r\n  props: {},\r\n  template: `<fuse-search-bar (inputEventEmitter)=\"onSearch($event)\"></fuse-search-bar>`,\r\n  methods: { onSearch: action('Search') },\r\n})"
             }
         ],
         "functions": [],
@@ -199,8 +258,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<MatProxyButtonComponent>",
-                "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
+                "rawtype": "StoryObj<FuseNavigationComponent>",
+                "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -216,20 +275,83 @@
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FuseSearchBarComponent>",
+                "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
             }
         ],
         "enumerations": [],
         "groupedVariables": {
+            "projects/bitsui-base/src/stories/search-bar.stories.ts": [
+                {
+                    "name": "Collapsed",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    collapsed: false\r\n  },\r\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    collapsed: true\r\n  },\r\n}"
+                },
+                {
+                    "name": "Expanded",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    collapsed: true\r\n  },\r\n}"
+                },
+                {
+                    "name": "WithSearch",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "() => ({\r\n  component: FuseSearchBarComponent,\r\n  props: {},\r\n  template: `<fuse-search-bar (inputEventEmitter)=\"onSearch($event)\"></fuse-search-bar>`,\r\n  methods: { onSearch: action('Search') },\r\n})"
+                }
+            ],
             "projects/bitsui-base/src/stories/button.stories.ts": [
                 {
-                    "name": "Large",
+                    "name": "Default",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/bitsui-base/src/stories/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Basic,\r\n    color: 'primary',\r\n    label: 'Default',\r\n    isDisabled: false\r\n  },\r\n}"
+                },
+                {
+                    "name": "Icon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Icon,\r\n    color: 'basic',\r\n    label: 'search',\r\n    isDisabled: false\r\n  },\r\n}"
                 },
                 {
                     "name": "meta",
@@ -239,7 +361,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\n  title: 'Example/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\n  args: { onClick: fn() },\n}"
+                    "defaultValue": "{\r\n  title: 'UI/MatButton',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  /*render: (args: MatProxyButtonComponent) => ({\r\n    props: {\r\n      ...args,\r\n    },\r\n  }),*/\r\n  argTypes: {\r\n    buttonType: {\r\n      control: { type: 'select' }, options: ButtonType\r\n    },\r\n    color: {\r\n      control: 'color',\r\n    },\r\n    isDisabled: {\r\n      defaultValue: false,\r\n      control: 'boolean',\r\n    }\r\n  },\r\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\r\n  args: { handleClick: fn() },\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [ButtonComponent, MatButtonModule],\r\n      declarations: [],\r\n    }),\r\n  ],\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -249,7 +371,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Raised,\r\n    color: 'primary',\r\n    label: 'Primary',\r\n    isDisabled: false\r\n  },\r\n}"
                 },
                 {
                     "name": "Secondary",
@@ -259,17 +381,39 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Flat,\r\n    color: 'accent',\r\n    label: 'Secondary',\r\n    isDisabled: false\r\n  },\r\n}"
                 },
                 {
-                    "name": "Small",
+                    "name": "Warn",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/bitsui-base/src/stories/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Flat,\r\n    color: 'warn',\r\n    label: 'Warn',\r\n    isDisabled: false\r\n  },\r\n}"
+                }
+            ],
+            "projects/bitsui-base/src/stories/navigation.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    layout: 'horizontal',\r\n    navigation: mockData\r\n  },\r\n}"
+                },
+                {
+                    "name": "mockData",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FuseNavigationItem[]",
+                    "defaultValue": "[\r\n  {\r\n    id: 'dashboard',\r\n    title: 'Dashboard',\r\n    type: 'item',\r\n    icon: 'heroicons_outline:home',\r\n    url: '/dashboard',\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'management',\r\n    title: 'Management',\r\n    type: 'collapsable',\r\n    icon: 'heroicons_outline:briefcase',\r\n    children: [\r\n      {\r\n        id: 'users',\r\n        title: 'Users',\r\n        type: 'item',\r\n        url: '/management/users',\r\n        isFeatureFound: true\r\n      },\r\n      {\r\n        id: 'roles',\r\n        title: 'Roles',\r\n        type: 'item',\r\n        url: '/management/roles',\r\n        isFeatureFound: true\r\n      },\r\n    ],\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'settings',\r\n    title: 'translate:SETTINGS', // Translation key for title\r\n    type: 'item',\r\n    icon: 'heroicons_outline:cog',\r\n    translate: 'SETTINGS', // Translation key for accessibility\r\n    badge: {\r\n      title: '3',\r\n      bg: 'primary',\r\n      fg: 'white',\r\n    },\r\n    url: '/settings',\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'documentation',\r\n    title: 'Documentation',\r\n    type: 'item',\r\n    icon: 'heroicons_outline:book',\r\n    externalUrl: true,\r\n    openInNewTab: true,\r\n    url: 'https://example.com/docs',\r\n    isFeatureFound: true\r\n  }\r\n]"
                 }
             ],
             "projects/bitsui-base/src/stories/header.stories.ts": [
@@ -336,48 +480,6 @@
                     "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
                 }
             ],
-            "projects/bitsui-base/src/stories/mat-button.stories.ts": [
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<MatProxyButtonComponent>",
-                    "defaultValue": "{\r\n  title: 'Example/MatButton',\r\n  component: MatProxyButtonComponent,\r\n  tags: ['autodocs'],\r\n  render: (args: MatProxyButtonComponent) => ({\r\n    props: {\r\n      ...args,\r\n    },\r\n  }),\r\n  argTypes: {\r\n    color: {\r\n      control: 'color',\r\n    },\r\n    isDisabled: {\r\n      defaultValue: false,\r\n      control: 'boolean',\r\n    }\r\n  },\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [MatProxyButtonComponent],\r\n      declarations: [],\r\n    }),\r\n  ],\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    color: 'primary',\r\n    isDisabled: false\r\n  },\r\n}"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    color: 'accent',\r\n    isDisabled: false\r\n  },\r\n}"
-                },
-                {
-                    "name": "Warn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    color: 'warn',\r\n    isDisabled: false\r\n  },\r\n}"
-                }
-            ],
             "projects/bitsui-base/.storybook/preview.ts": [
                 {
                     "name": "preview",
@@ -420,13 +522,13 @@
                     "kind": 183
                 }
             ],
-            "projects/bitsui-base/src/stories/mat-button.stories.ts": [
+            "projects/bitsui-base/src/stories/navigation.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<MatProxyButtonComponent>",
-                    "file": "projects/bitsui-base/src/stories/mat-button.stories.ts",
+                    "rawtype": "StoryObj<FuseNavigationComponent>",
+                    "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -440,6 +542,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<PageComponent>",
                     "file": "projects/bitsui-base/src/stories/page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/bitsui-base/src/stories/search-bar.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FuseSearchBarComponent>",
+                    "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -468,7 +583,17 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Large",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Icon",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -505,76 +630,6 @@
             },
             {
                 "filePath": "projects/bitsui-base/src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/bitsui-base/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/bitsui-base/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/bitsui-base/src/stories/header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/bitsui-base/src/stories/mat-button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/bitsui-base/src/stories/mat-button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -584,6 +639,56 @@
                 "status": "low"
             },
             {
+                "filePath": "projects/bitsui-base/src/stories/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "mockData",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "projects/bitsui-base/src/stories/page.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -609,6 +714,55 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MockFuseConfigService",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Collapsed",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Expanded",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithSearch",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
