@@ -5,6 +5,9 @@
     "paths": {
       "bitsui-base": [
         "./dist/bitsui-base"
+      ],
+      "bitsui-core": [
+        "./dist/bitsui-core"
       ]
     },
     "outDir": "./dist/out-tsc",
