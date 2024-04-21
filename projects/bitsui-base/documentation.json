@@ -7,12 +7,12 @@
     "classes": [
         {
             "name": "MockFuseConfigService",
-            "id": "class-MockFuseConfigService-85bb958158bcddb3bf68bc7059da980a8aba367ff5813b1b56ac6f3c2d4809fc8da694980688c8779298aceb942118575bbf0c89b030e0c31576734962e7386b",
+            "id": "class-MockFuseConfigService-761835027aa7d7cab186d6a446c11d5daa2de0650aeb870f5a71d21c40f37c2cb41a6036cc6cebf8a08d8dca51af573ac540a412d614b8f261bcfd8d1b4c4528",
             "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';\r\nimport { action } from '@storybook/addon-actions';\r\nimport { FuseSearchBarComponent } from '../lib/components/search-bar/search-bar.component';\r\nimport { FuseConfigService } from '../lib/services/config.service';\r\nimport { Subject } from 'rxjs';\r\nimport ButtonComponent, {ButtonType} from \"../lib/ui/button/button.component\";\r\n\r\n// Mocking the FuseConfigService\r\nclass MockFuseConfigService {\r\n  config = new Subject<any>();\r\n}\r\n\r\nexport default {\r\n  title: 'UI/Fuse Search Bar',\r\n  component: FuseSearchBarComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      providers: [\r\n        { provide: FuseConfigService, useClass: MockFuseConfigService }\r\n      ],\r\n    }),\r\n  ],\r\n} as Meta<FuseSearchBarComponent>;\r\n\r\ntype Story = StoryObj<FuseSearchBarComponent>;\r\nexport const Default: Story = {\r\n  args: {\r\n    collapsed: true\r\n  },\r\n};\r\n\r\nexport const Expanded: Story = {\r\n  args: {\r\n    collapsed: true\r\n  },\r\n};\r\n\r\nexport const Collapsed: Story = {\r\n  args: {\r\n    collapsed: false\r\n  },\r\n};\r\n\r\nexport const WithSearch = () => ({\r\n  component: FuseSearchBarComponent,\r\n  props: {},\r\n  template: `<fuse-search-bar (inputEventEmitter)=\"onSearch($event)\"></fuse-search-bar>`,\r\n  methods: { onSearch: action('Search') },\r\n});\r\n",
+            "sourceCode": "import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';\r\nimport { action } from '@storybook/addon-actions';\r\nimport { FuseSearchBarComponent } from '../lib/components/search-bar/search-bar.component';\r\nimport { FuseConfigService } from '../lib/services/config.service';\r\nimport { Subject } from 'rxjs';\r\n\r\n// Mocking the FuseConfigService\r\nclass MockFuseConfigService {\r\n  config = new Subject<any>();\r\n}\r\n\r\nexport default {\r\n  title: 'UI/Fuse Search Bar',\r\n  component: FuseSearchBarComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      providers: [\r\n        { provide: FuseConfigService, useClass: MockFuseConfigService }\r\n      ],\r\n    }),\r\n  ],\r\n} as Meta<FuseSearchBarComponent>;\r\n\r\ntype Story = StoryObj<FuseSearchBarComponent>;\r\nexport const Default: Story = {\r\n  args: {\r\n    collapsed: true\r\n  },\r\n};\r\n\r\nexport const Expanded: Story = {\r\n  args: {\r\n    collapsed: true\r\n  },\r\n};\r\n\r\nexport const Collapsed: Story = {\r\n  args: {\r\n    collapsed: false\r\n  },\r\n};\r\n\r\nexport const WithSearch = () => ({\r\n  component: FuseSearchBarComponent,\r\n  props: {},\r\n  template: `<fuse-search-bar (inputEventEmitter)=\"onSearch($event)\"></fuse-search-bar>`,\r\n  methods: { onSearch: action('Search') },\r\n});\r\n",
             "properties": [
                 {
                     "name": "config",
@@ -22,10 +22,224 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 10
+                    "line": 9
                 }
             ],
             "methods": [],
+            "indexSignatures": [],
+            "extends": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "MockFuseNavigationService",
+            "id": "class-MockFuseNavigationService-1e8a4d21b1f329568c4f23a7d485380e1434d00623b633a74787220993a76d01be19fd31b53c330b39d28e5e607a4db4239d59d12d422ac5854161cd857cf4b8",
+            "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';\r\nimport {ActivatedRoute} from '@angular/router';\r\nimport {FuseNavigationComponent} from \"../lib/components/navigation/navigation.component\";\r\nimport {FuseNavigationModule} from \"../lib/components/navigation/navigation.module\";\r\nimport {NgIf} from \"@angular/common\";\r\nimport {ReactiveFormsModule} from \"@angular/forms\";\r\nimport {StorybookTranslateModule} from \"./storybook-translate.module\";\r\nimport {TranslateModule} from \"@ngx-translate/core\";\r\nimport {BrowserAnimationsModule} from \"@angular/platform-browser/animations\";\r\nimport {MOCK_NAVIGATION_DATA} from \"./data/data-navigation\";\r\nimport {FuseNavigationService} from \"../lib/components/navigation/navigation.service\";\r\nimport {FuseNavigationItem} from \"../lib/types/fuse-navigation\";\r\n\r\nclass MockFuseNavigationService extends FuseNavigationService{\r\n  constructor() {\r\n    super();\r\n    this.register('main', MOCK_NAVIGATION_DATA as unknown as FuseNavigationItem);\r\n    this.setCurrentNavigation('main');\r\n  }\r\n}\r\n\r\nexport default {\r\n  title: 'UI/Navigation',\r\n  component: FuseNavigationComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [\r\n        NgIf,\r\n        ReactiveFormsModule,\r\n        FuseNavigationModule,\r\n        TranslateModule,\r\n        StorybookTranslateModule,\r\n        BrowserAnimationsModule\r\n      ],\r\n      providers: [{\r\n        provide: ActivatedRoute,\r\n        useValue: {\r\n          snapshot: {\r\n            paramMap: {\r\n              get(): string {\r\n                return '123';\r\n              },\r\n            },\r\n          },\r\n        },\r\n      },\r\n        { provide: FuseNavigationService, useClass: MockFuseNavigationService }\r\n      ]\r\n    }),\r\n  ]\r\n} as Meta<FuseNavigationComponent>;\r\n\r\ntype Story = StoryObj<FuseNavigationComponent>;\r\nexport const Primary: Story = {\r\n  name: 'I am the primary',\r\n  args: {\r\n    layout: 'vertical',\r\n    navigation: MOCK_NAVIGATION_DATA\r\n  },\r\n};\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 14
+            },
+            "properties": [],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": [
+                "FuseNavigationService"
+            ],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "MockFuseProgressBarService",
+            "id": "class-MockFuseProgressBarService-a23a5899c033519d925cc97e15300a25add59ac6e5aab5003f5f197e2d2ebb127729ac9e0def7a04aac23d5df096019cdc0ed763c9e67832d45487baf1ee66d6",
+            "file": "projects/bitsui-base/src/stories/progress-bar.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';\r\nimport {FuseProgressBarComponent} from \"../lib/components/progress-bar/progress-bar.component\";\r\nimport {FuseProgressBarModule} from \"../lib/components/progress-bar/progress-bar.module\";\r\nimport {FuseProgressBarService} from \"../lib/components/progress-bar/progress-bar.service\";\r\nimport { Router } from '@angular/router';\r\nimport {BehaviorSubject, Observable} from \"rxjs\";\r\n\r\nexport class MockFuseProgressBarService {\r\n  // Mimic the BehaviorSubject properties\r\n  private _bufferValue = new BehaviorSubject<number>(0);\r\n  private _mode = new BehaviorSubject<string>('indeterminate');\r\n  private _value = new BehaviorSubject<number>(0);\r\n  private _visible = new BehaviorSubject<boolean>(true);\r\n\r\n  // Mock observables for public accessors\r\n  bufferValue: Observable<any> = this._bufferValue.asObservable();\r\n  mode: Observable<any> = this._mode.asObservable();\r\n  value: Observable<any> = this._value.asObservable();\r\n  visible: Observable<any> = this._visible.asObservable();\r\n\r\n  // Mock methods for public functions\r\n  show(): void {\r\n    this._visible.next(true);\r\n  }\r\n\r\n  hide(): void {\r\n    this._visible.next(false);\r\n  }\r\n\r\n  // Optionally define methods to control mock behavior\r\n  setValue(value: number): void {\r\n    this._value.next(value); // Example: Allow setting a specific value\r\n  }\r\n\r\n  setMode(value: string): void {\r\n    if (['determinate', 'indeterminate', 'buffer', 'query'].includes(value)) {\r\n      this._mode.next(value); // Example: Validate mode input\r\n    } else {\r\n      throw new Error('Invalid mode provided');\r\n    }\r\n  }\r\n}\r\n\r\nexport default {\r\n  title: 'UI/ProgressBar',\r\n  component: FuseProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [FuseProgressBarModule],\r\n      providers: [\r\n        {\r\n          provide: FuseProgressBarService, useClass: MockFuseProgressBarService\r\n        }\r\n      ]\r\n    }),\r\n  ]\r\n} as Meta<FuseProgressBarComponent>;\r\n\r\ntype Story = StoryObj<FuseProgressBarComponent>;\r\nexport const Default: Story = {\r\n  args: {},\r\n};\r\n",
+            "properties": [
+                {
+                    "name": "_bufferValue",
+                    "defaultValue": "new BehaviorSubject<number>(0)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "_mode",
+                    "defaultValue": "new BehaviorSubject<string>('indeterminate')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "_value",
+                    "defaultValue": "new BehaviorSubject<number>(0)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "_visible",
+                    "defaultValue": "new BehaviorSubject<boolean>(true)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "bufferValue",
+                    "defaultValue": "this._bufferValue.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<any>",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "mode",
+                    "defaultValue": "this._mode.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<any>",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "this._value.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<any>",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "visible",
+                    "defaultValue": "this._visible.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<any>",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
+            "methods": [
+                {
+                    "name": "hide",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "setMode",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 35,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setValue",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "show",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "indexSignatures": [],
             "extends": [],
             "inputsClass": [],
@@ -50,6 +264,16 @@
                 "defaultValue": "{\r\n  args: {\r\n    collapsed: false\r\n  },\r\n}"
             },
             {
+                "name": "Custom",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/shortcuts.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    navigation: MOCK_NAVIGATION_DATA\r\n  },\r\n}"
+            },
+            {
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -63,11 +287,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                "file": "projects/bitsui-base/src/stories/progress-bar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    layout: 'horizontal',\r\n    navigation: mockData\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {},\r\n}"
             },
             {
                 "name": "Default",
@@ -78,6 +302,26 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    collapsed: true\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/shortcuts.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/sidebar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    name: 'Left Sidebar',\r\n    key: 'left-sidebar',\r\n    position: 'left'\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <fuse-sidebar [folded]=\"false\" class=\"navbar-fuse-sidebar\" lockedOpen=\"gt-md\" name=\"navbar\">\r\n      <navbar>\r\n      <ul>\r\n        <li>Nav1</li>\r\n        <li>Nav2</li>\r\n      </ul>\r\n</navbar>\r\n</fuse-sidebar>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "Expanded",
@@ -147,7 +391,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\r\n  title: 'UI/MatButton',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  /*render: (args: MatProxyButtonComponent) => ({\r\n    props: {\r\n      ...args,\r\n    },\r\n  }),*/\r\n  argTypes: {\r\n    buttonType: {\r\n      control: { type: 'select' }, options: ButtonType\r\n    },\r\n    color: {\r\n      control: 'color',\r\n    },\r\n    isDisabled: {\r\n      defaultValue: false,\r\n      control: 'boolean',\r\n    }\r\n  },\r\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\r\n  args: { handleClick: fn() },\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [ButtonComponent, MatButtonModule],\r\n      declarations: [],\r\n    }),\r\n  ],\r\n}"
+                "defaultValue": "{\r\n  title: 'UI/MatButton',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    buttonType: {\r\n      control: { type: 'select' }, options: ButtonType\r\n    },\r\n    color: {\r\n      control: 'color',\r\n    },\r\n    isDisabled: {\r\n      defaultValue: false,\r\n      control: 'boolean',\r\n    }\r\n  },\r\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\r\n  args: { handleClick: fn() },\r\n  decorators: [\r\n    // With template\r\n    componentWrapperDecorator((story) => `<div style=\"margin: 1em\">${story}</div>`),\r\n    moduleMetadata({\r\n      imports: [ButtonComponent, MatButtonModule],\r\n      declarations: [],\r\n    }),\r\n  ],\r\n}"
             },
             {
                 "name": "meta",
@@ -170,16 +414,6 @@
                 "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
             },
             {
-                "name": "mockData",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "FuseNavigationItem[]",
-                "defaultValue": "[\r\n  {\r\n    id: 'dashboard',\r\n    title: 'Dashboard',\r\n    type: 'item',\r\n    icon: 'heroicons_outline:home',\r\n    url: '/dashboard',\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'management',\r\n    title: 'Management',\r\n    type: 'collapsable',\r\n    icon: 'heroicons_outline:briefcase',\r\n    children: [\r\n      {\r\n        id: 'users',\r\n        title: 'Users',\r\n        type: 'item',\r\n        url: '/management/users',\r\n        isFeatureFound: true\r\n      },\r\n      {\r\n        id: 'roles',\r\n        title: 'Roles',\r\n        type: 'item',\r\n        url: '/management/roles',\r\n        isFeatureFound: true\r\n      },\r\n    ],\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'settings',\r\n    title: 'translate:SETTINGS', // Translation key for title\r\n    type: 'item',\r\n    icon: 'heroicons_outline:cog',\r\n    translate: 'SETTINGS', // Translation key for accessibility\r\n    badge: {\r\n      title: '3',\r\n      bg: 'primary',\r\n      fg: 'white',\r\n    },\r\n    url: '/settings',\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'documentation',\r\n    title: 'Documentation',\r\n    type: 'item',\r\n    icon: 'heroicons_outline:book',\r\n    externalUrl: true,\r\n    openInNewTab: true,\r\n    url: 'https://example.com/docs',\r\n    isFeatureFound: true\r\n  }\r\n]"
-            },
-            {
                 "name": "preview",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -198,6 +432,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Raised,\r\n    color: 'primary',\r\n    label: 'Primary',\r\n    isDisabled: false\r\n  },\r\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  name: 'I am the primary',\r\n  args: {\r\n    layout: 'vertical',\r\n    navigation: MOCK_NAVIGATION_DATA\r\n  },\r\n}"
             },
             {
                 "name": "Secondary",
@@ -280,8 +524,41 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<FuseProgressBarComponent>",
+                "file": "projects/bitsui-base/src/stories/progress-bar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<FuseSearchBarComponent>",
                 "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FuseShortcutsComponent>",
+                "file": "projects/bitsui-base/src/stories/shortcuts.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FuseSidebarComponent>",
+                "file": "projects/bitsui-base/src/stories/sidebar.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -332,6 +609,28 @@
                     "defaultValue": "() => ({\r\n  component: FuseSearchBarComponent,\r\n  props: {},\r\n  template: `<fuse-search-bar (inputEventEmitter)=\"onSearch($event)\"></fuse-search-bar>`,\r\n  methods: { onSearch: action('Search') },\r\n})"
                 }
             ],
+            "projects/bitsui-base/src/stories/shortcuts.stories.ts": [
+                {
+                    "name": "Custom",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/shortcuts.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    navigation: MOCK_NAVIGATION_DATA\r\n  },\r\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/shortcuts.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n\r\n  },\r\n}"
+                }
+            ],
             "projects/bitsui-base/src/stories/button.stories.ts": [
                 {
                     "name": "Default",
@@ -361,7 +660,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\r\n  title: 'UI/MatButton',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  /*render: (args: MatProxyButtonComponent) => ({\r\n    props: {\r\n      ...args,\r\n    },\r\n  }),*/\r\n  argTypes: {\r\n    buttonType: {\r\n      control: { type: 'select' }, options: ButtonType\r\n    },\r\n    color: {\r\n      control: 'color',\r\n    },\r\n    isDisabled: {\r\n      defaultValue: false,\r\n      control: 'boolean',\r\n    }\r\n  },\r\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\r\n  args: { handleClick: fn() },\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [ButtonComponent, MatButtonModule],\r\n      declarations: [],\r\n    }),\r\n  ],\r\n}"
+                    "defaultValue": "{\r\n  title: 'UI/MatButton',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    buttonType: {\r\n      control: { type: 'select' }, options: ButtonType\r\n    },\r\n    color: {\r\n      control: 'color',\r\n    },\r\n    isDisabled: {\r\n      defaultValue: false,\r\n      control: 'boolean',\r\n    }\r\n  },\r\n  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args\r\n  args: { handleClick: fn() },\r\n  decorators: [\r\n    // With template\r\n    componentWrapperDecorator((story) => `<div style=\"margin: 1em\">${story}</div>`),\r\n    moduleMetadata({\r\n      imports: [ButtonComponent, MatButtonModule],\r\n      declarations: [],\r\n    }),\r\n  ],\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -394,26 +693,28 @@
                     "defaultValue": "{\r\n  args: {\r\n    buttonType: ButtonType.Flat,\r\n    color: 'warn',\r\n    label: 'Warn',\r\n    isDisabled: false\r\n  },\r\n}"
                 }
             ],
-            "projects/bitsui-base/src/stories/navigation.stories.ts": [
+            "projects/bitsui-base/src/stories/progress-bar.stories.ts": [
                 {
                     "name": "Default",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                    "file": "projects/bitsui-base/src/stories/progress-bar.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    layout: 'horizontal',\r\n    navigation: mockData\r\n  },\r\n}"
-                },
+                    "defaultValue": "{\r\n  args: {},\r\n}"
+                }
+            ],
+            "projects/bitsui-base/src/stories/sidebar.stories.ts": [
                 {
-                    "name": "mockData",
+                    "name": "Default",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                    "file": "projects/bitsui-base/src/stories/sidebar.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "FuseNavigationItem[]",
-                    "defaultValue": "[\r\n  {\r\n    id: 'dashboard',\r\n    title: 'Dashboard',\r\n    type: 'item',\r\n    icon: 'heroicons_outline:home',\r\n    url: '/dashboard',\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'management',\r\n    title: 'Management',\r\n    type: 'collapsable',\r\n    icon: 'heroicons_outline:briefcase',\r\n    children: [\r\n      {\r\n        id: 'users',\r\n        title: 'Users',\r\n        type: 'item',\r\n        url: '/management/users',\r\n        isFeatureFound: true\r\n      },\r\n      {\r\n        id: 'roles',\r\n        title: 'Roles',\r\n        type: 'item',\r\n        url: '/management/roles',\r\n        isFeatureFound: true\r\n      },\r\n    ],\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'settings',\r\n    title: 'translate:SETTINGS', // Translation key for title\r\n    type: 'item',\r\n    icon: 'heroicons_outline:cog',\r\n    translate: 'SETTINGS', // Translation key for accessibility\r\n    badge: {\r\n      title: '3',\r\n      bg: 'primary',\r\n      fg: 'white',\r\n    },\r\n    url: '/settings',\r\n    isFeatureFound: true\r\n  },\r\n  {\r\n    id: 'documentation',\r\n    title: 'Documentation',\r\n    type: 'item',\r\n    icon: 'heroicons_outline:book',\r\n    externalUrl: true,\r\n    openInNewTab: true,\r\n    url: 'https://example.com/docs',\r\n    isFeatureFound: true\r\n  }\r\n]"
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    name: 'Left Sidebar',\r\n    key: 'left-sidebar',\r\n    position: 'left'\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <fuse-sidebar [folded]=\"false\" class=\"navbar-fuse-sidebar\" lockedOpen=\"gt-md\" name=\"navbar\">\r\n      <navbar>\r\n      <ul>\r\n        <li>Nav1</li>\r\n        <li>Nav2</li>\r\n      </ul>\r\n</navbar>\r\n</fuse-sidebar>\r\n    `,\r\n  }),\r\n}"
                 }
             ],
             "projects/bitsui-base/src/stories/header.stories.ts": [
@@ -491,6 +792,18 @@
                     "type": "Preview",
                     "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n  },\n}"
                 }
+            ],
+            "projects/bitsui-base/src/stories/navigation.stories.ts": [
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/bitsui-base/src/stories/navigation.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  name: 'I am the primary',\r\n  args: {\r\n    layout: 'vertical',\r\n    navigation: MOCK_NAVIGATION_DATA\r\n  },\r\n}"
+                }
             ]
         },
         "groupedFunctions": {},
@@ -548,6 +861,19 @@
                     "kind": 183
                 }
             ],
+            "projects/bitsui-base/src/stories/progress-bar.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FuseProgressBarComponent>",
+                    "file": "projects/bitsui-base/src/stories/progress-bar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "projects/bitsui-base/src/stories/search-bar.stories.ts": [
                 {
                     "name": "Story",
@@ -555,6 +881,32 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<FuseSearchBarComponent>",
                     "file": "projects/bitsui-base/src/stories/search-bar.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/bitsui-base/src/stories/shortcuts.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FuseShortcutsComponent>",
+                    "file": "projects/bitsui-base/src/stories/shortcuts.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "projects/bitsui-base/src/stories/sidebar.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FuseSidebarComponent>",
+                    "file": "projects/bitsui-base/src/stories/sidebar.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -670,12 +1022,11 @@
             },
             {
                 "filePath": "projects/bitsui-base/src/stories/navigation.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Default",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MockFuseNavigationService",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
@@ -683,7 +1034,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "mockData",
+                "name": "Primary",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -714,6 +1065,25 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/progress-bar.stories.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MockFuseProgressBarService",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/progress-bar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -763,6 +1133,36 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "WithSearch",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/shortcuts.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Custom",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/shortcuts.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/bitsui-base/src/stories/sidebar.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

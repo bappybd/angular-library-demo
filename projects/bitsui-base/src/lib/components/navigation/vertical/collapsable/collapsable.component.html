@@ -1,4 +1,4 @@
-<ng-container *ngIf="item.isFeatureFound">
+<ng-container *ngIf="item && item?.isFeatureFound">
     <!-- normal collapsable -->
     <a
         class="nav-link"
@@ -71,22 +71,22 @@
     </a>
 
     <ng-template #itemContent>
-        <mat-icon class="nav-link-icon" *ngIf="item.icon">{{
-            item.icon
+        <mat-icon class="nav-link-icon" *ngIf="item?.icon">{{
+            item?.icon
         }}</mat-icon>
-        <span class="nav-link-title" [translate]="item.translate">{{
-            item.title
+        <span class="nav-link-title" [translate]="item?.translate || ''">{{
+            item?.title
         }}</span>
         <span
             class="nav-link-badge"
             *ngIf="item.badge"
-            [translate]="item.badge.translate"
+            [translate]="item?.badge?.translate || ''"
             [ngStyle]="{
-                'background-color': item.badge.bg,
-                color: item.badge.fg
+                'background-color': item?.badge?.bg,
+                color: item?.badge?.fg
             }"
         >
-            {{ item.badge.title }}
+            {{ item?.badge?.title }}
         </span>
         <mat-icon class="collapsable-arrow">keyboard_arrow_right</mat-icon>
     </ng-template>
@@ -101,10 +101,11 @@
                 *ngIf="item.type === 'collapsable'"
                 [item]="item"
             ></fuse-nav-vertical-collapsable>
-            <fuse-nav-vertical-group
+            <!--TODO fix circular dependency-->
+            <!--<fuse-nav-vertical-group
                 *ngIf="item.type === 'group'"
                 [item]="item"
-            ></fuse-nav-vertical-group>
+            ></fuse-nav-vertical-group>-->
         </ng-container>
     </div>
 </ng-container>

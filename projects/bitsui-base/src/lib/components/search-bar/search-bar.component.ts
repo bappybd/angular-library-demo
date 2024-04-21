@@ -7,7 +7,7 @@ import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import ButtonComponent from "../../ui/button/button.component";
+import {ButtonComponent, ButtonType} from "../button/button.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 @Component({
@@ -19,7 +19,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatButtonModule,
     MatIconModule,
     FlexLayoutModule,
-    ButtonComponent,
     ButtonComponent
   ],
     templateUrl: './search-bar.component.html',
@@ -106,4 +105,5 @@ export class FuseSearchBarComponent implements OnInit, OnDestroy {
         this.inputEventEmitter.emit(event?.target?.value);
     }
 
+    protected readonly ButtonType = ButtonType;
 }

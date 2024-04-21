@@ -22,10 +22,10 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy {
     isLockedOpen: boolean;
 
     @Input()
-    fuseMatSidenavHelper: string;
+    fuseMatSidenavHelper: number = 0;
 
     @Input()
-    matIsLockedOpen: string;
+    matIsLockedOpen: string = '';
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -101,7 +101,7 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy {
      */
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(0);
         this._unsubscribeAll.complete();
     }
 }
@@ -111,7 +111,7 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy {
 })
 export class FuseMatSidenavTogglerDirective {
     @Input()
-    fuseMatSidenavToggler: string;
+    fuseMatSidenavToggler: number = 0;
 
     /**
      * Constructor

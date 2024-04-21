@@ -35,11 +35,11 @@ import { FuseConfigService } from "../../services/config.service";
 export class FuseSidebarComponent implements OnInit, OnDestroy {
     // Name
     @Input()
-    name: string;
+    name: string = '';
 
     // Key
     @Input()
-    key: string;
+    key: string = '';
 
     // Position
     @Input()
@@ -51,11 +51,11 @@ export class FuseSidebarComponent implements OnInit, OnDestroy {
 
     // Locked Open
     @Input()
-    lockedOpen: string;
+    lockedOpen: string = '';
 
     // isLockedOpen
     @HostBinding("class.locked-open")
-    isLockedOpen: boolean;
+    isLockedOpen: boolean = false;
 
     // Folded width
     @Input()
@@ -67,7 +67,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy {
 
     // Folded unfolded
     @HostBinding("class.unfolded")
-    unfolded: boolean;
+    unfolded: boolean = false;
 
     // Invisible overlay
     @Input()
@@ -84,10 +84,10 @@ export class FuseSidebarComponent implements OnInit, OnDestroy {
     // public
     public _folded: boolean;
     public _fuseConfig: any;
-    public _wasActive: boolean;
-    public _wasFolded: boolean;
+    public _wasActive: boolean = false;
+    public _wasFolded: boolean = false;
     public _backdrop: HTMLElement | null = null;
-    public _player: AnimationPlayer;
+    public _player: AnimationPlayer | null = null;
     public _unsubscribeAll: Subject<any>;
 
     @HostBinding("class.animations-enabled")
@@ -238,7 +238,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy {
         // Subscribe to config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((config) => {
+            .subscribe((config: any) => {
                 this._fuseConfig = config;
             });
 
@@ -271,7 +271,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy {
         this._fuseSidebarService.unregister(this.name);
 
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(0);
         this._unsubscribeAll.complete();
     }
 
@@ -477,11 +477,11 @@ export class FuseSidebarComponent implements OnInit, OnDestroy {
         this._backdrop = this._renderer.createElement("div");
 
         // Add a class to the backdrop element
-        this._backdrop.classList.add("fuse-sidebar-overlay");
+        this._backdrop?.classList.add("fuse-sidebar-overlay");
 
         // Add a class depending on the invisibleOverlay option
         if (this.invisibleOverlay) {
-            this._backdrop.classList.add("fuse-sidebar-overlay-invisible");
+            this._backdrop?.classList.add("fuse-sidebar-overlay-invisible");
         }
 
         // Append the backdrop to the parent of the sidebar
@@ -499,7 +499,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy {
         this._player.play();
 
         // Add an event listener to the overlay
-        this._backdrop.addEventListener("click", () => {
+        this._backdrop?.addEventListener("click", () => {
             this.close();
         });
 
@@ -530,7 +530,7 @@ export class FuseSidebarComponent implements OnInit, OnDestroy {
             // If the backdrop still exists...
             if (this._backdrop) {
                 // Remove the backdrop
-                this._backdrop.parentNode.removeChild(this._backdrop);
+                this._backdrop?.parentNode?.removeChild(this._backdrop);
                 this._backdrop = null;
             }
         });

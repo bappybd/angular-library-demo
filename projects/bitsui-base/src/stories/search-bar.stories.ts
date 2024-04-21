@@ -3,7 +3,6 @@ import { action } from '@storybook/addon-actions';
 import { FuseSearchBarComponent } from '../lib/components/search-bar/search-bar.component';
 import { FuseConfigService } from '../lib/services/config.service';
 import { Subject } from 'rxjs';
-import ButtonComponent, {ButtonType} from "../lib/ui/button/button.component";
 
 // Mocking the FuseConfigService
 class MockFuseConfigService {

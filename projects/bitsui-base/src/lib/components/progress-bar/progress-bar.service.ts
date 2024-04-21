@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 @Injectable({
@@ -9,10 +9,10 @@ import { filter } from 'rxjs/operators';
 export class FuseProgressBarService
 {
     // Private
-    private _bufferValue: BehaviorSubject<number>;
-    private _mode: BehaviorSubject<string>;
-    private _value: BehaviorSubject<number>;
-    private _visible: BehaviorSubject<boolean>;
+    private _bufferValue: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+    private _mode: BehaviorSubject<string> = new BehaviorSubject<string>('');
+    private _value: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+    private _visible: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     /**
      * Constructor

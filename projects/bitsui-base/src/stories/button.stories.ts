@@ -1,18 +1,13 @@
 import type {Meta, StoryObj} from '@storybook/angular';
-import {moduleMetadata} from '@storybook/angular';
+import {componentWrapperDecorator, moduleMetadata} from '@storybook/angular';
 import { fn } from '@storybook/test';
 import { MatButtonModule } from '@angular/material/button';
-import ButtonComponent, {ButtonType} from '../lib/ui/button/button.component';
+import {ButtonComponent, ButtonType} from '../lib/components/button/button.component';
 // More on how to set up stories at: https://storybook.js.org/docs/angular/writing-stories/introduction
 const meta: Meta<ButtonComponent> = {
   title: 'UI/MatButton',
   component: ButtonComponent,
   tags: ['autodocs'],
-  /*render: (args: MatProxyButtonComponent) => ({
-    props: {
-      ...args,
-    },
-  }),*/
   argTypes: {
     buttonType: {
       control: { type: 'select' }, options: ButtonType
@@ -28,6 +23,8 @@ const meta: Meta<ButtonComponent> = {
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { handleClick: fn() },
   decorators: [
+    // With template
+    componentWrapperDecorator((story) => `<div style="margin: 1em">${story}</div>`),
     moduleMetadata({
       imports: [ButtonComponent, MatButtonModule],
       declarations: [],
@@ -81,3 +78,25 @@ export const Icon: Story = {
     isDisabled: false
   },
 };
+
+
+/*
+export default meta;
+type Story = StoryObj<List>;
+
+export const ManyItems: Story = {
+  args: {
+    Selected: Selected.args.isSelected,
+    Unselected: Unselected.args.isSelected,
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <app-list>
+        <app-list-item [isSelected]="Selected"></app-list-item>
+        <app-list-item [isSelected]="Unselected"></app-list-item>
+        <app-list-item [isSelected]="Unselected"></app-list-item>
+      </app-list>
+    `,
+  }),
+};*/

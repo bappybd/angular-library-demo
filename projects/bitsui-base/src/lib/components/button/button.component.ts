@@ -17,7 +17,7 @@ export enum ButtonType {
   imports: [MatButtonModule, MatIconModule, NgClass, NgIf],
   templateUrl: './button.component.html'
 })
-export default class ButtonComponent {
+export class ButtonComponent {
 
   @Input()
   buttonType: ButtonType = ButtonType.Raised;

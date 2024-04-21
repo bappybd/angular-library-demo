@@ -1,6 +1,6 @@
-<ng-container *ngIf="item?.isFeatureFound">
+<ng-container *ngIf="item && item?.isFeatureFound">
     <div class="group-title" [ngClass]="item.classes">
-        <span class="hint-text" [translate]="item?.translate">{{
+        <span class="hint-text" [translate]="item?.translate || ''">{{
             item.title
         }}</span>
     </div>

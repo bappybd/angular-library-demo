@@ -23,7 +23,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
     hues: string[];
     view: string;
     selectedColor: any;
-    selectedPalette: string;
+    selectedPalette: string = '';
     selectedHue: string;
 
     // Color changed
@@ -139,7 +139,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
      * @param event
      * @param palette
      */
-    selectPalette(event, palette): void {
+    selectPalette(event: { stopPropagation: () => void; }, palette: string): void {
         // Stop propagation
         event.stopPropagation();
 
@@ -159,7 +159,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
      * @param event
      * @param hue
      */
-    selectHue(event, hue): void {
+    selectHue(event: { stopPropagation: () => void; }, hue: string): void {
         // Stop propagation
         event.stopPropagation();
 
@@ -175,7 +175,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
      *
      * @param event
      */
-    removeColor(event): void {
+    removeColor(event: { stopPropagation: () => void; }): void {
         // Stop propagation
         event.stopPropagation();
 
@@ -222,7 +222,7 @@ export class FuseMaterialColorPickerComponent implements ControlValueAccessor {
      *
      * @param event
      */
-    goToPalettesView(event): void {
+    goToPalettesView(event: { stopPropagation: () => void; }): void {
         // Stop propagation
         event.stopPropagation();
 

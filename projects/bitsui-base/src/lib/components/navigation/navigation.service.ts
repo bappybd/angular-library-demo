@@ -126,6 +126,23 @@ export class FuseNavigationService {
     this._onNavigationRegistered.next([key, navigation]);
   }
 
+  register2(key: string, navigation: FuseNavigationItem[]): void {
+    // Check if the key already being used
+    if (this._registry[key]) {
+      console.error(
+        `The navigation with the key '${key}' already exists. Either unregister it first or use a unique key.`
+      );
+
+      return;
+    }
+
+    // Add to the registry
+    this._registry[key] = navigation;
+
+    // Notify the subject
+    this._onNavigationRegistered.next([key, navigation]);
+  }
+
   /**
    * Unregister the navigation from the registry
    * @param key
@@ -201,7 +218,7 @@ export class FuseNavigationService {
    * @returns {any}
    */
   getCurrentNavigation(): any {
-    if (!this._currentNavigationKey) {
+    if (!this._currentNavigationKey) {debugger
       console.warn(`The current navigation is not set.`);
 
       return;

@@ -3,5 +3,6 @@
   "dest": "../../dist/bitsui-base",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": ["**/*.scss", ".npmrc"]
 }

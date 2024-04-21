@@ -3,13 +3,13 @@
     <div class="fuse-search-bar-content">
 
         <label for="fuse-search-bar-input">
-            <mat-storybook-button class="fuse-search-bar-expander" *ngIf="collapsed" [buttonType]="'icon'"
+            <mat-storybook-button class="fuse-search-bar-expander" *ngIf="collapsed" [buttonType]="ButtonType.Icon"
                                   [label]="'search'" (handleClick)="expand()"></mat-storybook-button>
         </label>
 
         <input id="fuse-search-bar-input" class="ml-24" type="text" placeholder="Search" (input)="search($event)"
                fxFlex>
-        <mat-storybook-button *ngIf="!collapsed" class="fuse-search-bar-collapse" [buttonType]="'icon'"
+        <mat-storybook-button *ngIf="!collapsed" class="fuse-search-bar-collapse" [buttonType]="ButtonType.Icon"
                               [label]="'close'" (handleClick)="collapse()"></mat-storybook-button>
 
     </div>

@@ -15,7 +15,6 @@ import { FuseProgressBarComponent } from './progress-bar.component';
     imports     : [
         CommonModule,
         RouterModule,
-
         MatButtonModule,
         MatIconModule,
         MatProgressBarModule

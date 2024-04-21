@@ -5,7 +5,10 @@
 export * from './lib/fuse.module';
 export * from './lib/shared.module';
 
-// Components
+//
+export * from './lib/components/button/button.component';
+
+
 export * from './lib/components/confirm-dialog/confirm-dialog.component';
 export * from './lib/components/confirm-dialog/confirm-dialog.module';
 

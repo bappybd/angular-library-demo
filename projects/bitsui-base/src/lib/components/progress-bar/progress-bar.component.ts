@@ -12,9 +12,9 @@ import { FuseProgressBarService } from './progress-bar.service';
 })
 export class FuseProgressBarComponent implements OnInit, OnDestroy {
     bufferValue: number | undefined;
-    mode: 'determinate' | 'indeterminate' | 'buffer' | 'query' | undefined;
+    mode: 'determinate' | 'indeterminate' | 'buffer' | 'query' = 'determinate';
     value: number | undefined;
-    visible: boolean | undefined;
+    visible: boolean = false;
 
     // Private
     private _unsubscribeAll: Subject<any>;

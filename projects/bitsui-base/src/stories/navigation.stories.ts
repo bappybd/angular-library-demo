@@ -1,73 +1,23 @@
 import {Meta, moduleMetadata, StoryObj} from '@storybook/angular';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {FuseNavigationComponent} from "../lib/components/navigation/navigation.component";
-import {FuseNavigationItem} from "../lib/types/fuse-navigation";
 import {FuseNavigationModule} from "../lib/components/navigation/navigation.module";
 import {NgIf} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import {StorybookTranslateModule} from "./storybook-translate.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MOCK_NAVIGATION_DATA} from "./data/data-navigation";
+import {FuseNavigationService} from "../lib/components/navigation/navigation.service";
+import {FuseNavigationItem} from "../lib/types/fuse-navigation";
 
-
-// Mock Data
-const mockData: FuseNavigationItem[] = [
-  {
-    id: 'dashboard',
-    title: 'Dashboard',
-    type: 'item',
-    icon: 'heroicons_outline:home',
-    url: '/dashboard',
-    isFeatureFound: true
-  },
-  {
-    id: 'management',
-    title: 'Management',
-    type: 'collapsable',
-    icon: 'heroicons_outline:briefcase',
-    children: [
-      {
-        id: 'users',
-        title: 'Users',
-        type: 'item',
-        url: '/management/users',
-        isFeatureFound: true
-      },
-      {
-        id: 'roles',
-        title: 'Roles',
-        type: 'item',
-        url: '/management/roles',
-        isFeatureFound: true
-      },
-    ],
-    isFeatureFound: true
-  },
-  {
-    id: 'settings',
-    title: 'translate:SETTINGS', // Translation key for title
-    type: 'item',
-    icon: 'heroicons_outline:cog',
-    translate: 'SETTINGS', // Translation key for accessibility
-    badge: {
-      title: '3',
-      bg: 'primary',
-      fg: 'white',
-    },
-    url: '/settings',
-    isFeatureFound: true
-  },
-  {
-    id: 'documentation',
-    title: 'Documentation',
-    type: 'item',
-    icon: 'heroicons_outline:book',
-    externalUrl: true,
-    openInNewTab: true,
-    url: 'https://example.com/docs',
-    isFeatureFound: true
+class MockFuseNavigationService extends FuseNavigationService{
+  constructor() {
+    super();
+    this.register('main', MOCK_NAVIGATION_DATA as unknown as FuseNavigationItem);
+    this.setCurrentNavigation('main');
   }
-]
+}
 
 export default {
   title: 'UI/Navigation',
@@ -94,15 +44,18 @@ export default {
             },
           },
         },
-      }]
+      },
+        { provide: FuseNavigationService, useClass: MockFuseNavigationService }
+      ]
     }),
   ]
 } as Meta<FuseNavigationComponent>;
 
 type Story = StoryObj<FuseNavigationComponent>;
-export const Default: Story = {
+export const Primary: Story = {
+  name: 'I am the primary',
   args: {
     layout: 'vertical',
-    navigation: mockData
+    navigation: MOCK_NAVIGATION_DATA
   },
 };
